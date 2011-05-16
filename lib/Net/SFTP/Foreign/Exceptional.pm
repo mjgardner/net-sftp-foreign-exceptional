@@ -146,6 +146,7 @@ __END__
 
     use Net::SFTP::Foreign::Exceptional;
 
+    my $sftp;
     eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1}
         or print "SFTP exception: $@\n";
 
