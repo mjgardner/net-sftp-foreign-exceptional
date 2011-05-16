@@ -9,47 +9,28 @@
 use utf8;
 use Modern::Perl;    ## no critic (UselessNoCritic,RequireExplicitPackage)
 
-package Net::SFTP::Foreign::Exceptional;
+package Net::SFTP::Foreign::Exceptional::Error;
 
 BEGIN {
-    $Net::SFTP::Foreign::Exceptional::VERSION = '0.001';
+    $Net::SFTP::Foreign::Exceptional::Error::VERSION = '0.001';
 }
 
-# ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
-
-use Carp;
-use English '-no_match_vars';
 use Moose;
-use MooseX::NonMoose;
-extends 'Net::SFTP::Foreign';
+use MooseX::Types::Moose 'Str';
+use Net::SFTP::Foreign::Constants ':error';
+use Net::SFTP::Foreign::Exceptional::Types 'SFTP_Error';
+extends 'Throwable::Error';
 
-sub BUILD {
-    my ( $self, $args_ref ) = @ARG;
-    $self->die_on_error("SSH connection to $args_ref->{host} failed");
-    return;
-}
+has status_code => ( ro, required, isa => SFTP_Error );
 
-around [
-    qw(
-        cwd setcwd get get_content get_symlink put put_symlink
-        ls find glob rget rput rremove mget mput
-        open close read write readline getc seek tell eof flush
-        sftpread sftpwrite opendir closedir readdir
-        stat fstat lstat setstat fsetstat
-        remove mkdir mkpath rmdir rename atomic_rename
-        readlink symlink hardlink
-        statvfs fstatvfs
-        )
-    ] => sub {
-    my ( $orig, $self ) = splice @ARG, 0, 2;
-    my $result = $self->$orig(@ARG);
-    croak 'SFTP error: ' . $self->error if !defined $result;
-    return $result;
-    };
+has '+message' => ( ro, lazy,
+    isa     => Str,
+    default => sub { &{ $ARG[0]->status_code } },
+);
 
-no Moose;
-__PACKAGE__->meta->make_immutable();
 1;
+
+__END__
 
 =pod
 
@@ -60,122 +41,11 @@ cpants kwalitee diff irc mailto metadata placeholders
 
 =head1 NAME
 
-Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions on failure
+Net::SFTP::Foreign::Exceptional::Error
 
 =head1 VERSION
 
 version 0.001
-
-=head1 SYNOPSIS
-
-    use Net::SFTP::Foreign::Exceptional;
-
-    eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1}
-        or print "SFTP exception: $@\n";
-
-=head1 DESCRIPTION
-
-Subclass of L<Net::SFTP::Foreign|Net::SFTP::Foreign> that wraps many of its
-methods to throw exceptions instead of merely returning C<undef>.  Any methods
-not listed here simply call the superclass.
-
-=head1 METHODS
-
-=head2 BUILD
-
-After C<new()>, an exception will be thrown if there was a connection failure.
-
-=head2 cwd
-
-=head2 setcwd
-
-=head2 get
-
-=head2 get_content
-
-=head2 get_symlink
-
-=head2 put
-
-=head2 put_symlink
-
-=head2 ls
-
-=head2 find
-
-=head2 glob
-
-=head2 rget
-
-=head2 rput
-
-=head2 rremove
-
-=head2 mget
-
-=head2 mput
-
-=head2 open
-
-=head2 close
-
-=head2 read
-
-=head2 write
-
-=head2 readline
-
-=head2 getc
-
-=head2 seek
-
-=head2 tell
-
-=head2 eof
-
-=head2 flush
-
-=head2 sftpread
-
-=head2 sftpwrite
-
-=head2 opendir
-
-=head2 closedir
-
-=head2 readdir
-
-=head2 stat
-
-=head2 fstat
-
-=head2 lstat
-
-=head2 setstat
-
-=head2 fsetstat
-
-=head2 remove
-
-=head2 mkdir
-
-=head2 mkpath
-
-=head2 rmdir
-
-=head2 rename
-
-=head2 atomic_rename
-
-=head2 readlink
-
-=head2 symlink
-
-=head2 hardlink
-
-=head2 statvs
-
-=head2 fstatvs
 
 =head1 SUPPORT
 
@@ -278,5 +148,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-__END__

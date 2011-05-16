@@ -1,3 +1,37 @@
+#
+# This file is part of Net-SFTP-Foreign-Exceptional
+#
+# This software is copyright (c) 2011 by GSI Commerce.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
+use utf8;
+use Modern::Perl;    ## no critic (UselessNoCritic,RequireExplicitPackage)
+
+package Net::SFTP::Foreign::Exceptional::Types;
+
+BEGIN {
+    $Net::SFTP::Foreign::Exceptional::Types::VERSION = '0.001';
+}
+
+use Moose;
+use MooseX::Types -declare => ['SFTP_Error'];
+use MooseX::Types::Moose 'Value';
+use List::MoreUtils 'any';
+use Net::SFTP::Foreign::Constants;
+
+subtype SFTP_Error, as Value, where {
+    my $value = $ARG;
+    any { $value == &{$ARG} }
+    map {"Net::SFTP::Foreign::Constants::$ARG"}
+        @{ $Net::SFTP::Foreign::Constants::EXPORT_TAGS{error} };
+};
+
+1;
+
+__END__
+
 =pod
 
 =for :stopwords Mark Gardner GSI Commerce cpan testmatrix url annocpan anno bugtracker rt
@@ -7,7 +41,7 @@ cpants kwalitee diff irc mailto metadata placeholders
 
 =head1 NAME
 
-Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions on failure
+Net::SFTP::Foreign::Exceptional::Types
 
 =head1 VERSION
 
@@ -113,3 +147,4 @@ This software is copyright (c) 2011 by GSI Commerce.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=cut
