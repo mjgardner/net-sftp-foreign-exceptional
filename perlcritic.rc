@@ -18,7 +18,7 @@ above_version = 5.010
 flowcontrol = carp cluck confess croak die exit goto warn exit pod2usage
 
 [Documentation::PodSpelling]
-stop_words = bugtracker FishEye WebLogic wlclean SFTP filesystem
+stop_words = bugtracker superclass cwd setcwd rget rput rremove mget mput readline getc eof sftpread sftpwrite opendir closedir readdir fstat lstat setstat fsetstat mkdir mkpath rmdir readlink symlink hardlink statvs fstatvs Perldoc perldoc annonations PASSed
 
 [Documentation::RequirePodSections]
 lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | SUPPORT | AUTHOR | COPYRIGHT AND LICENSE
@@ -29,7 +29,7 @@ functions = :builtins
 exclude_functions = print say
 
 [Subroutines::ProhibitCallsToUndeclaredSubs]
-exempt_subs = 
+exempt_subs = Carp::croak Moose::around Moose::extends
 
 [TestingAndDebugging::RequireUseStrict]
 equivalent_modules = Modern::Perl
