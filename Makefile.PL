@@ -28,15 +28,10 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'Carp' => '0',
     'English' => '0',
-    'List::MoreUtils' => '0',
     'Modern::Perl' => '0',
     'Moose' => '0',
     'MooseX::NonMoose' => '0',
-    'MooseX::Types' => '0',
-    'MooseX::Types::Moose' => '0',
     'Net::SFTP::Foreign' => '0',
-    'Net::SFTP::Foreign::Constants' => '0',
-    'Throwable::Error' => '0',
     'utf8' => '0'
   },
   'VERSION' => '0.001',
