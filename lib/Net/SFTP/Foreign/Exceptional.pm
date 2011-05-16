@@ -43,7 +43,11 @@ around [
     ] => sub {
     my ( $orig, $self ) = splice @ARG, 0, 2;
     my $result = $self->$orig(@ARG);
+
+    # TODO: replace with exception object
+    ## no critic (ErrorHandling::RequireUseOfExceptions)
     croak 'SFTP error: ' . $self->error if !defined $result;
+
     return $result;
     };
 
