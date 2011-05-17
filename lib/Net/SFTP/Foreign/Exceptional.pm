@@ -27,6 +27,10 @@ our $AUTOLOAD;
 sub AUTOLOAD {
     my $method_name = $AUTOLOAD;
     $method_name =~ s/.*:://;
+
+    Net::SFTP::Foreign->can($method_name)
+        or croak qq(Can't locate object method "$method_name" via package "Net::SFTP::Foreign::Exceptional");
+
     my $sub = sub {
         my $sftp = ${shift @_};
         if (wantarray) {
