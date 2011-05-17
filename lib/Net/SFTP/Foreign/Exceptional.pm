@@ -2,142 +2,53 @@ package Net::SFTP::Foreign::Exceptional;
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
+use strict;
+use warnings;
+
+use Net::SFTP::Foreign;
+
 use Carp;
-use English '-no_match_vars';
-use Moose;
-use MooseX::NonMoose;
-extends 'Net::SFTP::Foreign';
+our @CARP_NOT = qw(Net::SFTP::Foreign);
 
-=method BUILD
+our $ERROR = 0;
 
-After C<new()>, an exception will be thrown if there was a connection failure.
-
-=cut
-
-sub BUILD {
-    my ( $self, $args_ref ) = @ARG;
-    $self->die_on_error("SSH connection to $args_ref->{host} failed");
-    return;
+sub new {
+    my $class = shift;
+    my $sftp = Net::SFTP::Foreign->new(@_);
+    my $self = \$sftp;
+    bless $self, $class;
+    $sftp->die_on_error;
+    $self;
 }
 
-=method cwd
+sub DESTROY {}
 
-=method setcwd
-
-=method get
-
-=method get_content
-
-=method get_symlink
-
-=method put
-
-=method put_symlink
-
-=method ls
-
-=method find
-
-=method glob
-
-=method rget
-
-=method rput
-
-=method rremove
-
-=method mget
-
-=method mput
-
-=method open
-
-=method close
-
-=method read
-
-=method write
-
-=method readline
-
-=method getc
-
-=method seek
-
-=method tell
-
-=method eof
-
-=method flush
-
-=method sftpread
-
-=method sftpwrite
-
-=method opendir
-
-=method closedir
-
-=method readdir
-
-=method stat
-
-=method fstat
-
-=method lstat
-
-=method setstat
-
-=method fsetstat
-
-=method remove
-
-=method mkdir
-
-=method mkpath
-
-=method rmdir
-
-=method rename
-
-=method atomic_rename
-
-=method readlink
-
-=method symlink
-
-=method hardlink
-
-=method statvs
-
-=method fstatvs
-
-=cut
-
-around [
-    qw(
-        cwd setcwd get get_content get_symlink put put_symlink
-        ls find glob rget rput rremove mget mput
-        open close read write readline getc seek tell eof flush
-        sftpread sftpwrite opendir closedir readdir
-        stat fstat lstat setstat fsetstat
-        remove mkdir mkpath rmdir rename atomic_rename
-        readlink symlink hardlink
-        statvfs fstatvfs
-        )
-    ] => sub {
-    my ( $orig, $self ) = splice @ARG, 0, 2;
-    my $result = $self->$orig(@ARG);
-
-    # TODO: replace with exception object
-    ## no critic (ErrorHandling::RequireUseOfExceptions)
-    croak 'SFTP error: ' . $self->error if !defined $result;
-
-    return $result;
+our $AUTOLOAD;
+sub AUTOLOAD {
+    my $method_name = $AUTOLOAD;
+    $method_name =~ s/.*:://;
+    my $sub = sub {
+        my $sftp = ${shift @_};
+        if (wantarray) {
+            my @r = $sftp->$method_name(@_);
+            $ERROR = $sftp->error;
+            $sftp->die_on_error;
+            return @r;
+        }
+        else {
+            my $r = $sftp->$method_name(@_);
+            $ERROR = $sftp->error;
+            $sftp->die_on_error;
+            return $r;
+        }
     };
+    {
+        no strict 'refs';
+        *$method_name = $sub;
+    }
+    goto &$sub;
+}
 
-no Moose;
-__PACKAGE__->meta->make_immutable();
 1;
 
 __END__
