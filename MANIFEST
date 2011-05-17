@@ -8,8 +8,6 @@ Makefile.PL
 README
 dist.ini
 lib/Net/SFTP/Foreign/Exceptional.pm
-lib/Net/SFTP/Foreign/Exceptional/Error.pm
-lib/Net/SFTP/Foreign/Exceptional/Types.pm
 perlcritic.rc
 t/00-compile.t
 t/000-report-versions.t
