@@ -6,7 +6,7 @@ use Carp;
 use English '-no_match_vars';
 use Moose;
 use MooseX::NonMoose;
-extends 'Net::SFTP::Foreign';
+extends 'Net::SFTP::Foreign' => { -version => 1.64 };
 
 =method BUILD
 
