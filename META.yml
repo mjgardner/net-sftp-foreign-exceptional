@@ -3,6 +3,7 @@ abstract: 'wraps Net::SFTP::Foreign to throw exceptions on failure'
 author:
   - 'Mark Gardner <mjgardner@cpan.org>'
 build_requires:
+  Carp: 0
   File::Find: 0
   File::Temp: 0
   Scalar::Util: 0
@@ -18,7 +19,6 @@ meta-spec:
   version: 1.4
 name: Net-SFTP-Foreign-Exceptional
 requires:
-  Carp: 0
   Class::Inspector: 0
   English: 0
   Modern::Perl: 0

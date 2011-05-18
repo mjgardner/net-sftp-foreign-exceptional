@@ -17,7 +17,6 @@ BEGIN {
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
-use Carp;
 use English '-no_match_vars';
 use Moose;
 use Class::Inspector;
@@ -26,7 +25,6 @@ use Readonly;
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
 Readonly my @METHODS => Class::Inspector->methods( $WRAPPED, 'public' );
-our @CARP_NOT = ($WRAPPED);
 
 has ERROR => ( is => 'ro', writer => '_set_ERROR' );
 has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
@@ -39,21 +37,11 @@ around BUILDARGS => sub {
     return $class->$orig( _sftp => $sftp );
 };
 
-around \@METHODS => sub {
-    my ( $orig, $self ) = splice @ARG, 0, 2;
-    my $sftp = $self->_sftp;
-    if (wantarray) {
-        my @result = $sftp->$orig(@ARG);
-        $self->_set_ERROR( $sftp->error );
-        $sftp->die_on_error();
-        return @result;
-    }
-    else {
-        my $result = $sftp->$orig(@ARG);
-        $self->_set_ERROR( $sftp->error );
-        $sftp->die_on_error();
-        return $result;
-    }
+after \@METHODS => sub {
+    my $self = shift;
+    mt $sftp = $self->_sftp;
+    $self->_set_ERROR( $sftp->error );
+    $sftp->die_on_error();
 };
 
 __PACKAGE__->meta->make_immutable();

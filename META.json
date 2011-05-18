@@ -21,7 +21,6 @@
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
             "Class::Inspector" : 0,
             "English" : 0,
             "Modern::Perl" : 0,
@@ -34,6 +33,7 @@
       },
       "test" : {
          "requires" : {
+            "Carp" : 0,
             "File::Find" : 0,
             "File::Temp" : 0,
             "Scalar::Util" : 0,
