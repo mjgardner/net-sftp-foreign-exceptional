@@ -10,7 +10,7 @@ use Net::SFTP::Foreign 1.65;
 use Readonly;
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
-Readonly my @METHODS => grep { not $ARG ~~ qw(new DESTROY) }
+Readonly my @METHODS => grep { not $ARG ~~ [qw(new DESTROY)] }
     @{ Class::Inspector->methods( $WRAPPED, 'public' ) };
 
 has _sftp => ( ro, isa => $WRAPPED, handles => \@METHODS );
