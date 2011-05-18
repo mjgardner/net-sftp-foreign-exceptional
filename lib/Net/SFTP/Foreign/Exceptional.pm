@@ -2,141 +2,39 @@ package Net::SFTP::Foreign::Exceptional;
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
-use Carp;
 use English '-no_match_vars';
 use Moose;
-use MooseX::NonMoose;
-extends 'Net::SFTP::Foreign' => { -version => 1.64 };
+use Class::Inspector;
+use Net::SFTP::Foreign 1.65;
+use Readonly;
 
-=method BUILD
+Readonly my $WRAPPED => 'Net::SFTP::Foreign';
+Readonly my @METHODS => Class::Inspector->methods( $WRAPPED, 'public' );
 
-After C<new()>, an exception will be thrown if there was a connection failure.
+=attr ERROR
 
-=cut
-
-sub BUILD {
-    my ( $self, $args_ref ) = @ARG;
-    $self->die_on_error("SSH connection to $args_ref->{host} failed");
-    return;
-}
-
-=method cwd
-
-=method setcwd
-
-=method get
-
-=method get_content
-
-=method get_symlink
-
-=method put
-
-=method put_symlink
-
-=method ls
-
-=method find
-
-=method glob
-
-=method rget
-
-=method rput
-
-=method rremove
-
-=method mget
-
-=method mput
-
-=method open
-
-=method close
-
-=method read
-
-=method write
-
-=method readline
-
-=method getc
-
-=method seek
-
-=method tell
-
-=method eof
-
-=method flush
-
-=method sftpread
-
-=method sftpwrite
-
-=method opendir
-
-=method closedir
-
-=method readdir
-
-=method stat
-
-=method fstat
-
-=method lstat
-
-=method setstat
-
-=method fsetstat
-
-=method remove
-
-=method mkdir
-
-=method mkpath
-
-=method rmdir
-
-=method rename
-
-=method atomic_rename
-
-=method readlink
-
-=method symlink
-
-=method hardlink
-
-=method statvs
-
-=method fstatvs
+Contains the error code of the most recent action.
 
 =cut
 
-around [
-    qw(
-        cwd setcwd get get_content get_symlink put put_symlink
-        ls find glob rget rput rremove mget mput
-        open close read write readline getc seek tell eof flush
-        sftpread sftpwrite opendir closedir readdir
-        stat fstat lstat setstat fsetstat
-        remove mkdir mkpath rmdir rename atomic_rename
-        readlink symlink hardlink
-        statvfs fstatvfs
-        )
-    ] => sub {
-    my ( $orig, $self ) = splice @ARG, 0, 2;
-    my $result = $self->$orig(@ARG);
+has ERROR => ( is => 'ro', writer => '_set_ERROR' );
+has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
 
-    # TODO: replace with exception object
-    ## no critic (ErrorHandling::RequireUseOfExceptions)
-    croak 'SFTP error: ' . $self->error if !defined $result;
+around BUILDARGS => sub {
+    my ( $orig, $class ) = splice @ARG, 0, 2;
+    my $sftp = Net::SFTP::Foreign->new(@ARG);
+    $sftp->die_on_error();
 
-    return $result;
-    };
+    return $class->$orig( _sftp => $sftp );
+};
 
-no Moose;
+after \@METHODS => sub {
+    my $self = shift;
+    my $sftp = $self->_sftp;
+    $self->_set_ERROR( $sftp->error );
+    $sftp->die_on_error();
+};
+
 __PACKAGE__->meta->make_immutable();
 1;
 
@@ -147,12 +45,11 @@ __END__
     use Net::SFTP::Foreign::Exceptional;
 
     my $sftp;
-    eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1}
+    eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1 }
         or print "SFTP exception: $@\n";
 
 =head1 DESCRIPTION
 
-Subclass of L<Net::SFTP::Foreign|Net::SFTP::Foreign> that wraps many of its
-methods to throw exceptions instead of merely returning C<undef>.  Any methods
-not listed here simply call the superclass.
-
+Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign> that delegates all
+public method calls to it, throwing exceptions instead of merely returning
+C<undef>.

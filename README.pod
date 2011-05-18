@@ -11,119 +11,27 @@ Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions o
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
     use Net::SFTP::Foreign::Exceptional;
 
     my $sftp;
-    eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1}
+    eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1 }
         or print "SFTP exception: $@\n";
 
 =head1 DESCRIPTION
 
-Subclass of L<Net::SFTP::Foreign|Net::SFTP::Foreign> that wraps many of its
-methods to throw exceptions instead of merely returning C<undef>.  Any methods
-not listed here simply call the superclass.
+Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign> that delegates all
+public method calls to it, throwing exceptions instead of merely returning
+C<undef>.
 
-=head1 METHODS
+=head1 ATTRIBUTES
 
-=head2 BUILD
+=head2 ERROR
 
-After C<new()>, an exception will be thrown if there was a connection failure.
-
-=head2 cwd
-
-=head2 setcwd
-
-=head2 get
-
-=head2 get_content
-
-=head2 get_symlink
-
-=head2 put
-
-=head2 put_symlink
-
-=head2 ls
-
-=head2 find
-
-=head2 glob
-
-=head2 rget
-
-=head2 rput
-
-=head2 rremove
-
-=head2 mget
-
-=head2 mput
-
-=head2 open
-
-=head2 close
-
-=head2 read
-
-=head2 write
-
-=head2 readline
-
-=head2 getc
-
-=head2 seek
-
-=head2 tell
-
-=head2 eof
-
-=head2 flush
-
-=head2 sftpread
-
-=head2 sftpwrite
-
-=head2 opendir
-
-=head2 closedir
-
-=head2 readdir
-
-=head2 stat
-
-=head2 fstat
-
-=head2 lstat
-
-=head2 setstat
-
-=head2 fsetstat
-
-=head2 remove
-
-=head2 mkdir
-
-=head2 mkpath
-
-=head2 rmdir
-
-=head2 rename
-
-=head2 atomic_rename
-
-=head2 readlink
-
-=head2 symlink
-
-=head2 hardlink
-
-=head2 statvs
-
-=head2 fstatvs
+Contains the error code of the most recent action.
 
 =head1 SUPPORT
 
