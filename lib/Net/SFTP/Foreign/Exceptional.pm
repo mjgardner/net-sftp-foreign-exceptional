@@ -17,7 +17,7 @@ sub new {
     my $sftp = Net::SFTP::Foreign->new(@_);
     my $self = \$sftp;
     bless $self, $class;
-    $sftp->die_on_error;
+    $ERROR = $sftp->error and $sftp->die_on_error;
     $self;
 }
 
