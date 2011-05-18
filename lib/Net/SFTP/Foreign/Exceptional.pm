@@ -39,7 +39,7 @@ around BUILDARGS => sub {
 
 after \@METHODS => sub {
     my $self = shift;
-    mt $sftp = $self->_sftp;
+    my $sftp = $self->_sftp;
     $self->_set_ERROR( $sftp->error );
     $sftp->die_on_error();
 };
@@ -72,8 +72,9 @@ version 0.003
 
 =head1 DESCRIPTION
 
-Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign>, passing method calls
-along and throwing exceptions instead of merely returning C<undef>.
+Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign> that delegates all
+public method calls along and throwing exceptions instead of merely returning
+C<undef>.
 
 =head1 ATTRIBUTES
 

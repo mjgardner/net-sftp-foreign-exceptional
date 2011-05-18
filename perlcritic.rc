@@ -29,7 +29,7 @@ functions = :builtins
 exclude_functions = print say
 
 [Subroutines::ProhibitCallsToUndeclaredSubs]
-exempt_subs = Moose::around Moose::has Readonly::Readonly
+exempt_subs = Moose::around Moose::after Moose::has Readonly::Readonly
 
 [TestingAndDebugging::RequireUseStrict]
 equivalent_modules = Modern::Perl

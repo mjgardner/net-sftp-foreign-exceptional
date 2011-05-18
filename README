@@ -13,8 +13,8 @@ SYNOPSIS
             or print "SFTP exception: $@\n";
 
 DESCRIPTION
-    Wrapper around Net::SFTP::Foreign, passing method calls along and
-    throwing exceptions instead of merely returning "undef".
+    Wrapper around Net::SFTP::Foreign that delegates all public method calls
+    along and throwing exceptions instead of merely returning "undef".
 
 ATTRIBUTES
   ERROR
