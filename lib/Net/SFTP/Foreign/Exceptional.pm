@@ -29,6 +29,7 @@ Readonly my @METHODS => grep { not $ARG ~~ qw(new DESTROY) }
     @{ Class::Inspector->methods( $WRAPPED, 'public' ) };
 
 has _sftp => ( ro, isa => $WRAPPED, handles => \@METHODS );
+after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
@@ -36,8 +37,6 @@ around BUILDARGS => sub {
     $sftp->die_on_error();
     return $class->$orig( _sftp => $sftp );
 };
-
-after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 __PACKAGE__->meta->make_immutable();
 1;
