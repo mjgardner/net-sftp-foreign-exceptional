@@ -17,12 +17,15 @@ BEGIN {
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
+use Carp;
 use English '-no_match_vars';
 use Moose;
 use MooseX::Has::Sugar;
 use Class::Inspector;
 use Net::SFTP::Foreign 1.65;
 use Readonly;
+
+our @CARP_NOT = ('Net::SFTP::Foreign');
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
 Readonly my @METHODS => grep { not $ARG ~~ [qw(new DESTROY)] }
