@@ -27,14 +27,15 @@ my %WriteMakefileArgs = (
   'NAME' => 'Net::SFTP::Foreign::Exceptional',
   'PREREQ_PM' => {
     'Carp' => '0',
+    'Class::Inspector' => '0',
     'English' => '0',
     'Modern::Perl' => '0',
     'Moose' => '0',
-    'MooseX::NonMoose' => '0',
-    'Net::SFTP::Foreign' => '1.64',
+    'Net::SFTP::Foreign' => '1.65',
+    'Readonly' => '0',
     'utf8' => '0'
   },
-  'VERSION' => '0.002',
+  'VERSION' => '0.003',
   'test' => {
     'TESTS' => 't/*.t'
   }

@@ -3,71 +3,23 @@ NAME
     exceptions on failure
 
 VERSION
-    version 0.002
+    version 0.003
 
 SYNOPSIS
         use Net::SFTP::Foreign::Exceptional;
 
         my $sftp;
-        eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1}
+        eval { $sftp = Net::SFTP::Foreign::Exceptional->new(host => 'sftp.example.com'); 1 }
             or print "SFTP exception: $@\n";
 
 DESCRIPTION
-    Subclass of Net::SFTP::Foreign that wraps many of its methods to throw
-    exceptions instead of merely returning "undef". Any methods not listed
-    here simply call the superclass.
+    Wrapper around Net::SFTP::Foreign, passing method calls along and
+    throwing exceptions instead of merely returning "undef".
 
-METHODS
-  BUILD
-    After "new()", an exception will be thrown if there was a connection
-    failure.
+ATTRIBUTES
+  ERROR
+    Contains the error code of the most recent action.
 
-  cwd
-  setcwd
-  get
-  get_content
-  get_symlink
-  put
-  put_symlink
-  ls
-  find
-  glob
-  rget
-  rput
-  rremove
-  mget
-  mput
-  open
-  close
-  read
-  write
-  readline
-  getc
-  seek
-  tell
-  eof
-  flush
-  sftpread
-  sftpwrite
-  opendir
-  closedir
-  readdir
-  stat
-  fstat
-  lstat
-  setstat
-  fsetstat
-  remove
-  mkdir
-  mkpath
-  rmdir
-  rename
-  atomic_rename
-  readlink
-  symlink
-  hardlink
-  statvs
-  fstatvs
 SUPPORT
   Perldoc
     You can find documentation for this module with the perldoc command.
