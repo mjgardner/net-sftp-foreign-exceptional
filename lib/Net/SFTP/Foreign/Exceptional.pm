@@ -25,19 +25,21 @@ use Net::SFTP::Foreign 1.65;
 use Readonly;
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
+Readonly my @METHODS => Class::Inspector->methods( $WRAPPED, 'public' );
 our @CARP_NOT = ($WRAPPED);
-has _sftp => ( is => 'ro', isa => $WRAPPED );
 
 has ERROR => ( is => 'ro', writer => '_set_ERROR' );
+has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
     my $sftp = Net::SFTP::Foreign->new(@ARG);
     $sftp->die_on_error();
+
     return $class->$orig( _sftp => $sftp );
 };
 
-around Class::Inspector->methods( $WRAPPED, 'public' ) => sub {
+around \@METHODS => sub {
     my ( $orig, $self ) = splice @ARG, 0, 2;
     my $sftp = $self->_sftp;
     if (wantarray) {
