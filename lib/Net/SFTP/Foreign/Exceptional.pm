@@ -37,7 +37,7 @@ around BUILDARGS => sub {
     return $class->$orig( _sftp => $sftp );
 };
 
-around [ Class::Inspector->methods( $WRAPPED, 'public' ) ] => sub {
+around Class::Inspector->methods( $WRAPPED, 'public' ) => sub {
     my ( $orig, $self ) = splice @ARG, 0, 2;
     my $sftp = $self->_sftp;
     if (wantarray) {
