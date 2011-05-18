@@ -27,12 +27,6 @@ Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign> that delegates all
 public method calls to it, throwing exceptions instead of merely returning
 C<undef>.
 
-=head1 ATTRIBUTES
-
-=head2 ERROR
-
-Contains the error code of the most recent action.
-
 =head1 SUPPORT
 
 =head2 Perldoc

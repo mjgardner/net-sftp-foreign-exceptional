@@ -4,35 +4,23 @@ package Net::SFTP::Foreign::Exceptional;
 
 use English '-no_match_vars';
 use Moose;
+use MooseX::Has::Sugar;
 use Class::Inspector;
 use Net::SFTP::Foreign 1.65;
 use Readonly;
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
-Readonly my @METHODS => Class::Inspector->methods( $WRAPPED, 'public' );
+Readonly my @METHODS => grep { not $ARG ~~ qw(new DESTROY) }
+    @{ Class::Inspector->methods( $WRAPPED, 'public' ) };
 
-=attr ERROR
-
-Contains the error code of the most recent action.
-
-=cut
-
-has ERROR => ( is => 'ro', writer => '_set_ERROR' );
-has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
+has _sftp => ( ro, isa => $WRAPPED, handles => \@METHODS );
+after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
     my $sftp = Net::SFTP::Foreign->new(@ARG);
     $sftp->die_on_error();
-
     return $class->$orig( _sftp => $sftp );
-};
-
-after \@METHODS => sub {
-    my $self = shift;
-    my $sftp = $self->_sftp;
-    $self->_set_ERROR( $sftp->error );
-    $sftp->die_on_error();
 };
 
 __PACKAGE__->meta->make_immutable();
