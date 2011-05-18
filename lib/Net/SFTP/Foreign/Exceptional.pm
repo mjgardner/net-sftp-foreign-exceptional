@@ -73,7 +73,7 @@ version 0.003
 =head1 DESCRIPTION
 
 Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign> that delegates all
-public method calls along and throwing exceptions instead of merely returning
+public method calls to it, throwing exceptions instead of merely returning
 C<undef>.
 
 =head1 ATTRIBUTES
