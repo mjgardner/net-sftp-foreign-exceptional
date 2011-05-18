@@ -35,12 +35,12 @@ sub AUTOLOAD {
         my $sftp = ${shift @_};
         if (wantarray) {
             my @r = $sftp->$method_name(@_);
-            ($ERROR = $sftp->error) and $sftp->die_on_error;
+            $ERROR = $sftp->error and $sftp->die_on_error;
             return @r;
         }
         else {
             my $r = $sftp->$method_name(@_);
-            ($ERROR = $sftp->error) and $sftp->die_on_error;
+            $ERROR = $sftp->error and $sftp->die_on_error;
             return $r;
         }
     };
