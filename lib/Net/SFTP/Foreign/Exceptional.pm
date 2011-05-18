@@ -37,14 +37,7 @@ around BUILDARGS => sub {
     return $class->$orig( _sftp => $sftp );
 };
 
-has _error => (rw);
-
-after \@METHODS => sub {
-    my $self = shift;
-    my $sftp = $self->_sftp;
-    $self->_error( $sftp->error );
-    $sftp->die_on_error();
-};
+after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 __PACKAGE__->meta->make_immutable();
 1;

@@ -1,4 +1,4 @@
-0.003     2011-05-18 13:00:07 America/New_York
+0.003     2011-05-18 13:20:29 America/New_York
     wrap and delegate method calls rather than subclass (SALVA++)
 0.002     2011-05-17 13:43:23 America/New_York
     require recent version of Net::SFTP::Foreign
