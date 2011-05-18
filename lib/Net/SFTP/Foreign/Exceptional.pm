@@ -26,9 +26,9 @@ use Readonly;
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
 our @CARP_NOT = ($WRAPPED);
-has _sftp => ( is => ro, isa => $WRAPPED );
+has _sftp => ( is => 'ro', isa => $WRAPPED );
 
-has ERROR => ( is => ro, writer => '_set_ERROR' );
+has ERROR => ( is => 'ro', writer => '_set_ERROR' );
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
