@@ -1,5 +1,6 @@
 {{$NEXT}}
     wrap and delegate method calls rather than subclass (SALVA++)
+    throw exceptions from the perspective of the caller (SALVA++)
 0.002     2011-05-17 13:43:23 America/New_York
     require recent version of Net::SFTP::Foreign
 0.001     2011-05-16 12:52:47 America/New_York
