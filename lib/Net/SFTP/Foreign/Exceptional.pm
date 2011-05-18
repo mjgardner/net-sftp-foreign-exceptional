@@ -25,7 +25,7 @@ use Class::Inspector;
 use Net::SFTP::Foreign 1.65;
 use Readonly;
 
-our @CARP_NOT = qw(Net::SFTP::Foreign Class::MOP::Method);
+our @CARP_NOT = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped);
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
 Readonly my @METHODS => grep { not $ARG ~~ [qw(new DESTROY)] }
