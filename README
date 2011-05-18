@@ -16,10 +16,6 @@ DESCRIPTION
     Wrapper around Net::SFTP::Foreign that delegates all public method calls
     to it, throwing exceptions instead of merely returning "undef".
 
-ATTRIBUTES
-  ERROR
-    Contains the error code of the most recent action.
-
 SUPPORT
   Perldoc
     You can find documentation for this module with the perldoc command.

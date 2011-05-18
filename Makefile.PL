@@ -31,6 +31,7 @@ my %WriteMakefileArgs = (
     'English' => '0',
     'Modern::Perl' => '0',
     'Moose' => '0',
+    'MooseX::Has::Sugar' => '0',
     'Net::SFTP::Foreign' => '1.65',
     'Readonly' => '0',
     'utf8' => '0'

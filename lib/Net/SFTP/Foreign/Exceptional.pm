@@ -19,28 +19,30 @@ BEGIN {
 
 use English '-no_match_vars';
 use Moose;
+use MooseX::Has::Sugar;
 use Class::Inspector;
 use Net::SFTP::Foreign 1.65;
 use Readonly;
 
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
-Readonly my @METHODS => Class::Inspector->methods( $WRAPPED, 'public' );
+Readonly my @METHODS => grep { not $ARG ~~ qw(new DESTROY) }
+    @{ Class::Inspector->methods( $WRAPPED, 'public' ) };
 
-has ERROR => ( is => 'ro', writer => '_set_ERROR' );
-has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
+has _sftp => ( ro, isa => $WRAPPED, handles => \@METHODS );
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
     my $sftp = Net::SFTP::Foreign->new(@ARG);
     $sftp->die_on_error();
-
     return $class->$orig( _sftp => $sftp );
 };
+
+has _error => (rw);
 
 after \@METHODS => sub {
     my $self = shift;
     my $sftp = $self->_sftp;
-    $self->_set_ERROR( $sftp->error );
+    $self->_error( $sftp->error );
     $sftp->die_on_error();
 };
 
@@ -75,12 +77,6 @@ version 0.003
 Wrapper around L<Net::SFTP::Foreign|Net::SFTP::Foreign> that delegates all
 public method calls to it, throwing exceptions instead of merely returning
 C<undef>.
-
-=head1 ATTRIBUTES
-
-=head2 ERROR
-
-Contains the error code of the most recent action.
 
 =head1 SUPPORT
 
