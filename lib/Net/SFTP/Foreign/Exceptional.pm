@@ -48,6 +48,8 @@ __PACKAGE__->meta->make_immutable();
 =for :stopwords Mark Gardner GSI Commerce cpan testmatrix url annocpan anno bugtracker rt
 cpants kwalitee diff irc mailto metadata placeholders
 
+=encoding utf8
+
 =head1 NAME
 
 Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions on failure
