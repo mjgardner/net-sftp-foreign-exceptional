@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.006; }
+BEGIN { require 5.008; }
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -31,7 +31,8 @@ my %WriteMakefileArgs = (
     'English' => '0',
     'Moose' => '0',
     'Net::SFTP::Foreign' => '1.65',
-    'Readonly' => '0'
+    'Readonly' => '0',
+    'utf8' => '0'
   },
   'VERSION' => '0.004',
   'test' => {

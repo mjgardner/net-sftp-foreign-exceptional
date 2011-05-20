@@ -1,9 +1,9 @@
 severity = brutal
 verbose = 8
-exclude = Bangs::ProhibitFlagComments Documentation::RequirePodAtEnd Editor::RequireEmacsFileVariables Miscellanea::RequireRcsKeywords Modules::RequireExplicitInclusion Modules::RequireExplicitPackage Modules::RequirePerlVersion Tics::ProhibitLongLines CodeLayout::RequireUseUTF8 Documentation::RequirePODUseEncodingUTF8
+exclude = Bangs::ProhibitFlagComments Documentation::RequirePodAtEnd Editor::RequireEmacsFileVariables Miscellanea::RequireRcsKeywords Modules::RequireExplicitInclusion Modules::RequireExplicitPackage Modules::RequirePerlVersion Tics::ProhibitLongLines
 
 [Lax::RequireExplicitPackage::ExceptForPragmata]
-allowed_pragmata = perlversion strict warnings
+allowed_pragmata = perlversion strict warnings utf8
 
 [CodeLayout::RequireTidyCode]
 perltidyrc = xt/author/perltidy.rc

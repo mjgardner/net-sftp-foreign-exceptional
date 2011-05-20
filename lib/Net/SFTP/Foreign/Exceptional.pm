@@ -8,6 +8,7 @@
 #
 use strict;
 use warnings;
+use utf8;
 
 package Net::SFTP::Foreign::Exceptional;
 
@@ -46,6 +47,8 @@ __PACKAGE__->meta->make_immutable();
 
 =for :stopwords Mark Gardner GSI Commerce cpan testmatrix url annocpan anno bugtracker rt
 cpants kwalitee diff irc mailto metadata placeholders
+
+=encoding utf8
 
 =head1 NAME
 
