@@ -25,6 +25,7 @@ requires:
   Net::SFTP::Foreign: 1.65
   Readonly: 0
   perl: 5.006
+  utf8: 0
 resources:
   bugtracker: https://github.com/mjgardner/net-sftp-foreign-exceptional/issues
   homepage: http://search.cpan.org/dist/Net-SFTP-Foreign-Exceptional/

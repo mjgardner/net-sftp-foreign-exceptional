@@ -8,6 +8,7 @@
 #
 use strict;
 use warnings;
+use utf8;
 
 package Net::SFTP::Foreign::Exceptional;
 
