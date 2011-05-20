@@ -27,8 +27,6 @@ around BUILDARGS => sub {
 __PACKAGE__->meta->make_immutable();
 1;
 
-__END__
-
 =head1 SYNOPSIS
 
     use Net::SFTP::Foreign::Exceptional;
