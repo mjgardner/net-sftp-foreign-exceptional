@@ -14,7 +14,7 @@ use utf8;
 package Net::SFTP::Foreign::Exceptional;
 
 BEGIN {
-    $Net::SFTP::Foreign::Exceptional::VERSION = '0.004';
+    $Net::SFTP::Foreign::Exceptional::VERSION = '0.005';
 }
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
@@ -44,6 +44,8 @@ around BUILDARGS => sub {
 __PACKAGE__->meta->make_immutable();
 1;
 
+__END__
+
 =pod
 
 =for :stopwords Mark Gardner GSI Commerce cpan testmatrix url annocpan anno bugtracker rt
@@ -55,7 +57,7 @@ Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions o
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -172,5 +174,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-__END__

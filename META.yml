@@ -29,4 +29,4 @@ resources:
   bugtracker: https://github.com/mjgardner/net-sftp-foreign-exceptional/issues
   homepage: http://search.cpan.org/dist/Net-SFTP-Foreign-Exceptional/
   repository: git://github.com/mjgardner/net-sftp-foreign-exceptional.git
-version: 0.004
+version: 0.005
