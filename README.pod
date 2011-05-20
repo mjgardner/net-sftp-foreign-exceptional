@@ -3,15 +3,13 @@
 =for :stopwords Mark Gardner GSI Commerce cpan testmatrix url annocpan anno bugtracker rt
 cpants kwalitee diff irc mailto metadata placeholders
 
-=encoding utf8
-
 =head1 NAME
 
 Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions on failure
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 

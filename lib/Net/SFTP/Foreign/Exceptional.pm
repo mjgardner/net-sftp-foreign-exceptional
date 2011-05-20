@@ -5,18 +5,16 @@ package Net::SFTP::Foreign::Exceptional;
 use Carp;
 use English '-no_match_vars';
 use Moose;
-use MooseX::Has::Sugar;
 use Class::Inspector;
 use Net::SFTP::Foreign 1.65;
 use Readonly;
 
 our @CARP_NOT = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped);
-
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
-Readonly my @METHODS => grep { not $ARG ~~ [qw(new DESTROY)] }
+Readonly my @METHODS => grep { $ARG ne 'new' and $ARG ne 'DESTROY' }
     @{ Class::Inspector->methods( $WRAPPED, 'public' ) };
 
-has _sftp => ( ro, isa => $WRAPPED, handles => \@METHODS );
+has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
 after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 around BUILDARGS => sub {

@@ -1,21 +1,12 @@
 severity = brutal
 verbose = 8
-exclude = Bangs::ProhibitFlagComments Documentation::RequirePodAtEnd Editor::RequireEmacsFileVariables Miscellanea::RequireRcsKeywords Modules::RequireExplicitInclusion Modules::RequireExplicitPackage Modules::RequirePerlVersion Tics::ProhibitLongLines
+exclude = Documentation::RequirePodAtEnd Editor::RequireEmacsFileVariables Miscellanea::RequireRcsKeywords Modules::RequireExplicitInclusion Modules::RequireExplicitPackage Tics::ProhibitLongLines Documentation::RequirePODUseEncodingUTF8
 
 [Lax::RequireExplicitPackage::ExceptForPragmata]
-allowed_pragmata = diagnostics feature perlversion strict warnings utf8
+allowed_pragmata = perlversion strict warnings utf8
 
 [CodeLayout::RequireTidyCode]
 perltidyrc = xt/author/perltidy.rc
-
-# since we're using Modern::Perl
-[Compatibility::PerlMinimumVersionAndWhy]
-above_version = 5.010
-[Compatibility::PodMinimumVersion]
-above_version = 5.010
-
-[ControlStructures::ProhibitPostfixControls]
-flowcontrol = carp cluck confess croak die exit goto warn exit pod2usage
 
 [Documentation::PodSpelling]
 stop_words = bugtracker Perldoc perldoc annonations PASSed
@@ -24,15 +15,5 @@ stop_words = bugtracker Perldoc perldoc annonations PASSed
 lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | SUPPORT | AUTHOR | COPYRIGHT AND LICENSE
 script_sections = NAME | USAGE | DESCRIPTION | CONFIGURATION | SUPPORT | AUTHOR | COPYRIGHT AND LICENSE
 
-[InputOutput::RequireCheckedSyscalls]
-functions = :builtins
-exclude_functions = print say
-
 [Subroutines::ProhibitCallsToUndeclaredSubs]
-exempt_subs = Moose::around Moose::after Moose::has MooseX::Has::Sugar::ro MooseX::Has::Sugar::rw Readonly::Readonly
-
-[TestingAndDebugging::RequireUseStrict]
-equivalent_modules = Modern::Perl
-
-[TestingAndDebugging::RequireUseWarnings]
-equivalent_modules = Modern::Perl
+exempt_subs = Moose::around Moose::after Moose::has Readonly::Readonly
