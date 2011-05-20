@@ -3,7 +3,7 @@ NAME
     exceptions on failure
 
 VERSION
-    version 0.003
+    version 0.004
 
 SYNOPSIS
         use Net::SFTP::Foreign::Exceptional;

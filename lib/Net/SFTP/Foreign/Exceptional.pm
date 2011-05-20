@@ -1,18 +1,7 @@
-#
-# This file is part of Net-SFTP-Foreign-Exceptional
-#
-# This software is copyright (c) 2011 by GSI Commerce.
-#
-# This is free software; you can redistribute it and/or modify it under
-# the same terms as the Perl 5 programming language system itself.
-#
-use utf8;
-use Modern::Perl;    ## no critic (UselessNoCritic,RequireExplicitPackage)
-
 package Net::SFTP::Foreign::Exceptional;
 
 BEGIN {
-    $Net::SFTP::Foreign::Exceptional::VERSION = '0.003';
+    $Net::SFTP::Foreign::Exceptional::VERSION = '0.004';
 }
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
@@ -20,18 +9,16 @@ BEGIN {
 use Carp;
 use English '-no_match_vars';
 use Moose;
-use MooseX::Has::Sugar;
 use Class::Inspector;
 use Net::SFTP::Foreign 1.65;
 use Readonly;
 
 our @CARP_NOT = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped);
-
 Readonly my $WRAPPED => 'Net::SFTP::Foreign';
-Readonly my @METHODS => grep { not $ARG ~~ [qw(new DESTROY)] }
+Readonly my @METHODS => grep { $ARG ne 'new' and $ARG ne 'DESTROY' }
     @{ Class::Inspector->methods( $WRAPPED, 'public' ) };
 
-has _sftp => ( ro, isa => $WRAPPED, handles => \@METHODS );
+has _sftp => ( is => 'ro', isa => $WRAPPED, handles => \@METHODS );
 after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 around BUILDARGS => sub {
@@ -49,15 +36,13 @@ __PACKAGE__->meta->make_immutable();
 =for :stopwords Mark Gardner GSI Commerce cpan testmatrix url annocpan anno bugtracker rt
 cpants kwalitee diff irc mailto metadata placeholders
 
-=encoding utf8
-
 =head1 NAME
 
 Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions on failure
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
