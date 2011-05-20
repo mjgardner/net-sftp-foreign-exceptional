@@ -6,6 +6,8 @@ BEGIN {
 
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
+use strict;
+use warnings;
 use Carp;
 use English '-no_match_vars';
 use Moose;
