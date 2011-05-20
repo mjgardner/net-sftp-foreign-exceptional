@@ -9,7 +9,6 @@
 #
 use strict;
 use warnings;
-use utf8;
 
 BEGIN {
     unless ( $ENV{AUTHOR_TESTING} ) {

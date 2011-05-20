@@ -9,7 +9,6 @@
 #
 use strict;
 use warnings;
-use utf8;
 use warnings;
 use strict;
 use Test::More 0.94;

@@ -31,8 +31,7 @@ my %WriteMakefileArgs = (
     'English' => '0',
     'Moose' => '0',
     'Net::SFTP::Foreign' => '1.65',
-    'Readonly' => '0',
-    'utf8' => '0'
+    'Readonly' => '0'
   },
   'VERSION' => '0.004',
   'test' => {
