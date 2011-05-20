@@ -1,5 +1,5 @@
-0.004     2011-05-20 12:32:27 America/New_York
-    only require perl 5.8 or later
+0.004     2011-05-20 12:35:08 America/New_York
+    slightly fewer dependencies, only require perl 5.8 or later
 0.003     2011-05-18 13:51:30 America/New_York
     wrap and delegate method calls rather than subclass (SALVA++)
     throw exceptions from the perspective of the caller (SALVA++)
