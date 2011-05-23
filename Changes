@@ -1,4 +1,4 @@
-0.005     2011-05-23 19:49:27 America/New_York
+0.005     2011-05-23 19:50:40 America/New_York
     use Moose itself rather than Class::Inspector, further reducing dependencies
     (DROLSKY++)
     add simple test for methods implemented

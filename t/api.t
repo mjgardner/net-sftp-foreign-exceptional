@@ -13,7 +13,8 @@ use warnings;
 use utf8;
 
 use English '-no_match_vars';
-use Test::Most tests => 1;
+use Test::More tests => 1;
+use Test::Deep;
 use Moose ();
 use Net::SFTP::Foreign;
 use Net::SFTP::Foreign::Exceptional;
