@@ -14,13 +14,12 @@ use utf8;
 
 use English '-no_match_vars';
 use Test::Most tests => 1;
-use Test::API;
 use Moose ();
 use Net::SFTP::Foreign;
 use Net::SFTP::Foreign::Exceptional;
 
 cmp_deeply( [ method_names('Net::SFTP::Foreign::Exceptional') ],
-    superbagof( method_names('Net::SFTP::Foreign') ), 'methods', );
+    superbagof( method_names('Net::SFTP::Foreign') ), 'methods' );
 
 sub method_names {
     map { $ARG->name }
