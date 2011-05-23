@@ -25,7 +25,6 @@
             "English" : 0,
             "Moose" : 0,
             "Net::SFTP::Foreign" : "1.65",
-            "Readonly" : 0,
             "perl" : "5.008",
             "utf8" : 0
          }
