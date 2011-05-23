@@ -13,14 +13,19 @@ use warnings;
 use utf8;
 
 use English '-no_match_vars';
-use Test::More tests => 1;
+use Test::More tests => 2;
 use Test::Deep;
+use Test::Moose;
 use Moose ();
 use Net::SFTP::Foreign;
 use Net::SFTP::Foreign::Exceptional;
 
-cmp_deeply( [ method_names('Net::SFTP::Foreign::Exceptional') ],
-    superbagof( method_names('Net::SFTP::Foreign') ), 'methods' );
+meta_ok('Net::SFTP::Foreign::Exceptional');
+cmp_deeply(
+    [ method_names('Net::SFTP::Foreign::Exceptional') ],
+    superbagof( method_names('Net::SFTP::Foreign') ),
+    'wrapped methods',
+);
 
 sub method_names {
     map { $ARG->name }

@@ -16,6 +16,7 @@ my %WriteMakefileArgs = (
     'File::Temp' => '0',
     'Scalar::Util' => '0',
     'Test::Deep' => '0',
+    'Test::Moose' => '0',
     'Test::More' => '0.94'
   },
   'CONFIGURE_REQUIRES' => {
