@@ -32,7 +32,7 @@ my %WriteMakefileArgs = (
     'Net::SFTP::Foreign' => '1.65',
     'utf8' => '0'
   },
-  'VERSION' => '0.006',
+  'VERSION' => '0.010',
   'test' => {
     'TESTS' => 't/*.t'
   }

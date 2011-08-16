@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use utf8;
 
-our $VERSION = '0.006';    # VERSION
+our $VERSION = '0.010';    # VERSION
 use Carp;
 use English '-no_match_vars';
 use Any::Moose;
@@ -47,7 +47,7 @@ Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions o
 
 =head1 VERSION
 
-version 0.006
+version 0.010
 
 =head1 SYNOPSIS
 
