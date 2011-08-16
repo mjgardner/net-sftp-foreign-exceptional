@@ -16,10 +16,6 @@ package Net::SFTP::Foreign::Exceptional;
     $Net::SFTP::Foreign::Exceptional::VERSION = '0.006';
 }
 
-BEGIN {
-    $Net::SFTP::Foreign::Exceptional::VERSION = '0.005';
-}
-
 # ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
 use Carp;
