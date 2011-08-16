@@ -4,13 +4,15 @@ package Net::SFTP::Foreign::Exceptional;
 
 use Carp;
 use English '-no_match_vars';
-use Moose;
+use Any::Moose;
 use Net::SFTP::Foreign 1.65;
 
-our @CARP_NOT = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped);
+our @CARP_NOT
+    = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped Mouse::Meta::Class);
 my @METHODS = grep { $ARG ne 'new' and $ARG ne 'DESTROY' }
     map { $ARG->name }
-    Moose::Meta::Class->initialize('Net::SFTP::Foreign')->get_all_methods();
+    any_moose('::Meta::Class')->initialize('Net::SFTP::Foreign')
+    ->get_all_methods();
 
 has _sftp =>
     ( is => 'ro', isa => 'Net::SFTP::Foreign', handles => \@METHODS );
