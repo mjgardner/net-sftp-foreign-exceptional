@@ -1,7 +1,11 @@
 package Net::SFTP::Foreign::Exceptional;
 
-# ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
+use 5.008;
+use strict;
+use warnings;
+use utf8;
 
+# VERSION
 use Carp;
 use English '-no_match_vars';
 use Any::Moose;
@@ -27,6 +31,8 @@ around BUILDARGS => sub {
 
 __PACKAGE__->meta->make_immutable();
 1;
+
+# ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
 =head1 SYNOPSIS
 

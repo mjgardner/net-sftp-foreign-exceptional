@@ -1,5 +1,10 @@
 #!perl
 
+use 5.008;
+use strict;
+use warnings;
+use utf8;
+
 use English '-no_match_vars';
 use Test::More tests => 2;
 use Test::Deep;
