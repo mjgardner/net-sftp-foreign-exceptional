@@ -1,23 +1,11 @@
-#
-# This file is part of Net-SFTP-Foreign-Exceptional
-#
-# This software is copyright (c) 2011 by GSI Commerce.
-#
-# This is free software; you can redistribute it and/or modify it under
-# the same terms as the Perl 5 programming language system itself.
-#
+package Net::SFTP::Foreign::Exceptional;
+
 use 5.008;
 use strict;
 use warnings;
 use utf8;
 
-package Net::SFTP::Foreign::Exceptional;
-{
-    $Net::SFTP::Foreign::Exceptional::VERSION = '0.006';
-}
-
-# ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
-
+our $VERSION = '0.006';    # VERSION
 use Carp;
 use English '-no_match_vars';
 use Any::Moose;
@@ -43,6 +31,8 @@ around BUILDARGS => sub {
 
 __PACKAGE__->meta->make_immutable();
 1;
+
+# ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
 
 __END__
 
