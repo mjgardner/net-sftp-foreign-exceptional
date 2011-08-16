@@ -1,4 +1,4 @@
-0.010     2011-08-16 14:14:52 America/New_York
+0.010     2011-08-16 14:22:18 America/New_York
     use Any::Moose for those who prefer Mouse-sized objects
 0.005     2011-05-23 19:56:08 America/New_York
     use Moose itself rather than Class::Inspector, further reducing dependencies
