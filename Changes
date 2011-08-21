@@ -1,4 +1,4 @@
-0.011     2011-08-21 17:40:31 America/New_York
+0.011     2011-08-21 17:41:52 America/New_York
     deprecate in favor of Net::SFTP::Foreign constructor's autodie parameter
 0.010     2011-08-16 14:22:18 America/New_York
     use Any::Moose for those who prefer Mouse-sized objects
