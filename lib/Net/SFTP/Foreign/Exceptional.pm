@@ -10,6 +10,8 @@ use Carp;
 use English '-no_match_vars';
 use Any::Moose;
 use Net::SFTP::Foreign 1.67;
+use Package::DeprecationManager -deprecations =>
+    { 'Net::SFTP::Foreign::Exceptional::new' => '0.11', };
 
 our @CARP_NOT
     = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped Mouse::Meta::Class);
@@ -23,6 +25,11 @@ has _sftp =>
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
+
+    deprecated(
+        'This module is no longer necessary.  Use the autodie parameter to Net::SFTP::Foreign directly.'
+    );
+
     return $class->$orig(
         _sftp => Net::SFTP::Foreign->new( @ARG, autodie => 1 ) );
 };

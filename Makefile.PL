@@ -31,6 +31,7 @@ my %WriteMakefileArgs = (
     'Carp' => '0',
     'English' => '0',
     'Net::SFTP::Foreign' => '1.67',
+    'Package::DeprecationManager' => '0',
     'strict' => '0',
     'utf8' => '0',
     'warnings' => '0'
