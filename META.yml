@@ -8,6 +8,7 @@ build_requires:
   Scalar::Util: 0
   Test::Deep: 0
   Test::More: 0.94
+  Test::Most: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
