@@ -38,7 +38,7 @@ around BUILDARGS => sub {
 __PACKAGE__->meta->make_immutable();
 1;
 
-# ABSTRACT: wraps Net::SFTP::Foreign to throw exceptions on failure
+# ABSTRACT: DEPRECATED. Wraps Net::SFTP::Foreign to throw exceptions on failure.
 
 __END__
 
@@ -49,11 +49,19 @@ cpants kwalitee diff irc mailto metadata placeholders
 
 =head1 NAME
 
-Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions on failure
+Net::SFTP::Foreign::Exceptional - DEPRECATED. Wraps Net::SFTP::Foreign to throw exceptions on failure.
 
 =head1 VERSION
 
 version 0.011
+
+=head1 DEPRECATION NOTICE
+
+This module is deprecated in favor of
+L<"Net::SFTP::Foreign's own error handling"|Net::SFTP::Foreign/"Error handling">,
+specifically its C<autodie> mode which offers the same functionality that this
+module was originally developed to achieve.  You will receive a warning every
+time you call the C<new()> method on this module.
 
 =head1 SYNOPSIS
 

@@ -1,9 +1,16 @@
 NAME
-    Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw
-    exceptions on failure
+    Net::SFTP::Foreign::Exceptional - DEPRECATED. Wraps Net::SFTP::Foreign
+    to throw exceptions on failure.
 
 VERSION
     version 0.011
+
+DEPRECATION NOTICE
+    This module is deprecated in favor of "Net::SFTP::Foreign's own error
+    handling", specifically its "autodie" mode which offers the same
+    functionality that this module was originally developed to achieve. You
+    will receive a warning every time you call the "new()" method on this
+    module.
 
 SYNOPSIS
         use Net::SFTP::Foreign::Exceptional;

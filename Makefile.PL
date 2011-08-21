@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "wraps Net::SFTP::Foreign to throw exceptions on failure",
+  "ABSTRACT" => "DEPRECATED. Wraps Net::SFTP::Foreign to throw exceptions on failure.",
   "AUTHOR" => "Mark Gardner <mjgardner\@cpan.org>",
   "BUILD_REQUIRES" => {
     "File::Find" => 0,

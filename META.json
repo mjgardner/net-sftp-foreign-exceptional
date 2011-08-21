@@ -1,5 +1,5 @@
 {
-   "abstract" : "wraps Net::SFTP::Foreign to throw exceptions on failure",
+   "abstract" : "DEPRECATED. Wraps Net::SFTP::Foreign to throw exceptions on failure.",
    "author" : [
       "Mark Gardner <mjgardner@cpan.org>"
    ],
