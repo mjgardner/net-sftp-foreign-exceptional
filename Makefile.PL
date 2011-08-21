@@ -29,10 +29,12 @@ my %WriteMakefileArgs = (
     'Any::Moose' => '0',
     'Carp' => '0',
     'English' => '0',
-    'Net::SFTP::Foreign' => '1.65',
-    'utf8' => '0'
+    'Net::SFTP::Foreign' => '1.67',
+    'strict' => '0',
+    'utf8' => '0',
+    'warnings' => '0'
   },
-  'VERSION' => '0.010',
+  'VERSION' => '0.011',
   'test' => {
     'TESTS' => 't/*.t'
   }

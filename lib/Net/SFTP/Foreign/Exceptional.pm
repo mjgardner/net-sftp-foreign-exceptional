@@ -5,11 +5,11 @@ use strict;
 use warnings;
 use utf8;
 
-our $VERSION = '0.010';    # VERSION
+our $VERSION = '0.011';    # VERSION
 use Carp;
 use English '-no_match_vars';
 use Any::Moose;
-use Net::SFTP::Foreign 1.65;
+use Net::SFTP::Foreign 1.67;
 
 our @CARP_NOT
     = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped Mouse::Meta::Class);
@@ -20,13 +20,11 @@ my @METHODS = grep { $ARG ne 'new' and $ARG ne 'DESTROY' }
 
 has _sftp =>
     ( is => 'ro', isa => 'Net::SFTP::Foreign', handles => \@METHODS );
-after \@METHODS => sub { shift->_sftp->die_on_error() };
 
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
-    my $sftp = Net::SFTP::Foreign->new(@ARG);
-    $sftp->die_on_error();
-    return $class->$orig( _sftp => $sftp );
+    return $class->$orig(
+        _sftp => Net::SFTP::Foreign->new( @ARG, autodie => 1 ) );
 };
 
 __PACKAGE__->meta->make_immutable();
@@ -47,7 +45,7 @@ Net::SFTP::Foreign::Exceptional - wraps Net::SFTP::Foreign to throw exceptions o
 
 =head1 VERSION
 
-version 0.010
+version 0.011
 
 =head1 SYNOPSIS
 
