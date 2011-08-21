@@ -26,9 +26,10 @@ has _sftp =>
 around BUILDARGS => sub {
     my ( $orig, $class ) = splice @ARG, 0, 2;
 
-    deprecated(
-        'This module is no longer necessary.  Use the autodie parameter to Net::SFTP::Foreign directly.'
-    );
+    deprecated(<<'END_DEPRECATION');
+This module is no longer necessary.
+Use the autodie parameter to Net::SFTP::Foreign directly.
+END_DEPRECATION
 
     return $class->$orig(
         _sftp => Net::SFTP::Foreign->new( @ARG, autodie => 1 ) );
