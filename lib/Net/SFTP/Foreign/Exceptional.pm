@@ -13,10 +13,8 @@ use Net::SFTP::Foreign 1.67;
 use Package::DeprecationManager -deprecations =>
     { 'Net::SFTP::Foreign::Exceptional::new' => '0.11' };
 
-our $DEPRECATION = <<'END_DEPRECATION';
-This module is no longer necessary.
-Use the autodie parameter to Net::SFTP::Foreign directly.
-END_DEPRECATION
+our $DEPRECATION
+    = 'Use the autodie parameter to Net::SFTP::Foreign directly.';
 
 our @CARP_NOT
     = qw(Net::SFTP::Foreign Class::MOP::Method::Wrapped Mouse::Meta::Class);

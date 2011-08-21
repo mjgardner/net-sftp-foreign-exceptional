@@ -9,36 +9,36 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'wraps Net::SFTP::Foreign to throw exceptions on failure',
-  'AUTHOR' => 'Mark Gardner <mjgardner@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'Scalar::Util' => '0',
-    'Test::Deep' => '0',
-    'Test::More' => '0.94',
-    'Test::Most' => '0'
+  "ABSTRACT" => "wraps Net::SFTP::Foreign to throw exceptions on failure",
+  "AUTHOR" => "Mark Gardner <mjgardner\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "Scalar::Util" => 0,
+    "Test::Deep" => 0,
+    "Test::More" => "0.94",
+    "Test::Most" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'Net-SFTP-Foreign-Exceptional',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'Net::SFTP::Foreign::Exceptional',
-  'PREREQ_PM' => {
-    'Any::Moose' => '0',
-    'Carp' => '0',
-    'English' => '0',
-    'Net::SFTP::Foreign' => '1.67',
-    'Package::DeprecationManager' => '0',
-    'strict' => '0',
-    'utf8' => '0',
-    'warnings' => '0'
+  "DISTNAME" => "Net-SFTP-Foreign-Exceptional",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Net::SFTP::Foreign::Exceptional",
+  "PREREQ_PM" => {
+    "Any::Moose" => 0,
+    "Carp" => 0,
+    "English" => 0,
+    "Net::SFTP::Foreign" => "1.67",
+    "Package::DeprecationManager" => 0,
+    "strict" => 0,
+    "utf8" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '0.011',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.011",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 
